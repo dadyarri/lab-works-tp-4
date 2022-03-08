@@ -4,7 +4,37 @@
     ViewData["Title"] = "Simple calculator";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form method="post">
+    <div class="form-check form-check-inline">
+        <input type="text" name="firstValue" placeholder="Первое число" class="form-control m-2"/>
+        <input type="text" name="secondValue" placeholder="Второе число" class="form-control m-2"/>
+
+        <input type="radio" class="btn-check" name="operation" id="add" autocomplete="off" value="add">
+        <label class="btn btn-outline-primary" for="add">Сложение</label>
+
+        <input type="radio" class="btn-check" name="operation" id="sub" autocomplete="off" value="sub">
+        <label class="btn btn-outline-secondary" for="sub">Вычитание</label>
+
+        <input type="radio" class="btn-check" name="operation" id="mul" autocomplete="off" value="mul">
+        <label class="btn btn-outline-success" for="mul">Умножение</label>
+
+        <input type="radio" class="btn-check" name="operation" id="div" autocomplete="off" value="div">
+        <label class="btn btn-outline-danger" for="div">Деление</label>
+    </div>
+
+    <div class="block">
+        <input class="btn btn-success" type="submit" name="submit" value="Отправить"/>
+    </div>
+</form>
+
+@if (Model.IsCalculated)
+{
+    @if (Model.Error)
+    {
+        <h3>Введены некорректные данные</h3>
+    }
+    else
+    {
+        <h3>Ответ: @(Model.Answer)</h3>
+    }
+}
