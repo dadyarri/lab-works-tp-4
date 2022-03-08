@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace lw1.Pages
 {
@@ -41,11 +40,11 @@ namespace lw1.Pages
                         break;
                 }
                 Error = false;
-                IsCalculated = true;
             } else
             {
                 Error = true;
             }
+            IsCalculated = true;
         }
     }
 }
