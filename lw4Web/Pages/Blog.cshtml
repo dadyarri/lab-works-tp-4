@@ -1,0 +1,48 @@
+﻿@page
+@model mainWeb.Pages.BlogModel
+@{
+}
+
+<section class="blog">
+    <div class="container">
+        <h1 class="text-center app-title">Мини блог</h1>
+        <form class="form blog-form" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form__input blog-form__input" value="" type="text" asp-for="article.Title" placeholder="заголовок" />
+                    <span asp-validation-for="article.Title" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <input class="form__input blog-form__input" value="" type="text" asp-for="article.Author" placeholder="автор" />
+                    <span asp-validation-for="article.Author" class="text-danger"></span>
+                </div>
+            </div>
+            <textarea class="form__input blog-form__input" asp-for="article.Description" placeholder="Введите текст статьи"></textarea>
+            <span asp-validation-for="article.Description" class="text-danger"></span>
+            <div class="btn-box">
+                <button type="submit" class="btn btn-success">Создать статью</button>
+            </div>
+        </form>
+        @if (Model.GetArticles().Count == 0)
+        {
+            <h3>Ваш список статей пока ещё пуст</h3>
+        }
+        else
+        {
+            <h3>Ваши статьи</h3>
+        }
+        @foreach (var article in Model.GetArticles())
+        {
+            <article class="article">
+                <div class="card article__card bg-light">
+                    <div class="article__header">
+                        <h4 class="text-center">@article.Title</h4>
+                        <p class="article__author text-right"> Автор: @article.Author</p>
+                    </div>
+                    <p class="article__description">@article.Description</p>
+                    <small>Date: @article.Date</small>
+                </div>
+            </article>
+        }
+    </div>
+</section>
