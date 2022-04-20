@@ -1,0 +1,43 @@
+﻿@page
+@using Lab2.Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h2>Список игр</h2>
+<form method="post">
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Разработчик</th>
+            <th scope="col">Жанр</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>
+            <input name="title"/><br />
+            @Html.ValidationMessage("title")
+        </td>
+        <td>
+            <input name="developer"/><br />
+            @Html.ValidationMessage("developer")
+        </td>
+        <td>
+            <input name="genre"/>
+            <input type="submit" value="Сохранить" /><br />
+            @Html.ValidationMessage("genre")
+        </td>
+    </tr>
+        @if (Model.GetGames().Count != 0)
+        {
+            @foreach (var game in Model.GetGames())
+        {
+            <td>@game.Title</td>
+            <td>@game.Developer</td>
+            <td>@game.Genre</td>
+        }
+        }
+    </table>
+</form>
