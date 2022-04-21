@@ -2,7 +2,7 @@ using mainAPI.DAO;
 using mainAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace mainAPI.Controllers
+namespace lw4API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

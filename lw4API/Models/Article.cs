@@ -1,4 +1,4 @@
-﻿namespace mainAPI.Models
+﻿namespace lw4API.Models
 {
     public class Article
     {

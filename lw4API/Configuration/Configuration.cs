@@ -1,4 +1,4 @@
-﻿namespace mainAPI.Configuration
+﻿namespace lw4API.Configuration
 {
     public class Configuration
     {

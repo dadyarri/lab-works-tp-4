@@ -1,4 +1,4 @@
-﻿namespace mainAPI.DAO
+﻿namespace lw4API.DAO
 {
     public interface IDAO<Entity>
     {

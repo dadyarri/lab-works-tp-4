@@ -1,5 +1,5 @@
 ﻿using Npgsql;
-namespace mainAPI.Configuration
+namespace lw4API.Configuration
 {
     public class Database
     {

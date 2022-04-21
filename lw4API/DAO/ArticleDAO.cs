@@ -3,7 +3,7 @@ using mainAPI.Models;
 using Npgsql;
 using System.Data.Common;
 
-namespace mainAPI.DAO
+namespace lw4API.DAO
 {
     public class ArticleDAO : IDAO<Article>
     {
