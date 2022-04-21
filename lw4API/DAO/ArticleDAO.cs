@@ -1,46 +1,47 @@
-﻿using mainAPI.Configuration;
-using mainAPI.Models;
+﻿using lw4API.Configuration;
+using lw4API.Models;
 using Npgsql;
 using System.Data.Common;
 
 namespace lw4API.DAO
 {
-    public class ArticleDAO : IDAO<Article>
+    public class ArticleDao : IDAO<Article>
     {
-        private Database database;
-        public List<Article> articles = new List<Article>();
+        private readonly Database _database;
+        private readonly List<Article> _articles = new();
 
-        public ArticleDAO(IConfiguration configuration)
+        public ArticleDao(IConfiguration configuration)
         {
-            this.database = new Database(configuration);
+            this._database = new Database(configuration);
         }
 
         public void Create(Article article)
         {
             NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO article (title, author, description, date) VALUES (" +
-                "@Title, @Author, @Description, @Date)");
+                                                  "@Title, @Author, @Description, @Date)");
             cmd.Parameters.AddWithValue("@Title", article.Title);
             cmd.Parameters.AddWithValue("@Author", article.Author);
             cmd.Parameters.AddWithValue("@Description", article.Description);
             cmd.Parameters.AddWithValue("@Date", article.Date);
 
-            database.ExecuteSQLRequest_withParams(cmd);
+            _database.ExecuteSQLRequest_withParams(cmd);
         }
 
         public List<Article> GetAll()
         {
             string sql = "SELECT * FROM article";
-            database.ExecuteSQLRequest(sql);
-            if (database.reader.HasRows)
+            _database.ExecuteSQLRequest(sql);
+            if (_database.reader.HasRows)
             {
-                foreach (DbDataRecord line in database.reader)
+                foreach (DbDataRecord line in _database.reader)
                 {
-                    Article article = new Article(line.GetString(0), line.GetString(1), line.GetString(2), line.GetDateTime(3));
-                    articles.Insert(0, article);
+                    Article article = new Article(line.GetString(0), line.GetString(1), line.GetString(2),
+                        line.GetDateTime(3));
+                    _articles.Insert(0, article);
                 }
-
             }
-            return articles;
+
+            return _articles;
         }
     }
 }

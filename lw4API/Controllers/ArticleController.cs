@@ -1,5 +1,5 @@
-using mainAPI.DAO;
-using mainAPI.Models;
+using lw4API.DAO;
+using lw4API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lw4API.Controllers
@@ -8,18 +8,18 @@ namespace lw4API.Controllers
     [Route("[controller]")]
     public class ArticleController : ControllerBase
     {
-        readonly ArticleDAO articleDAO = new ArticleDAO(Configuration.Configuration.config);
+        readonly ArticleDao _articleDAO = new(Configuration.Configuration.config);
 
         [HttpGet]
         public List<Article> GetArticle()
         {
-            return articleDAO.GetAll();
+            return _articleDAO.GetAll();
         }
 
         [HttpPost]
         public void CreateArticle(Article article)
         {
-            articleDAO.Create(article);
+            _articleDAO.Create(article);
         }
     }
 }
