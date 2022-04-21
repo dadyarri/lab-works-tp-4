@@ -1,8 +1,8 @@
 ﻿namespace lw4API.DAO
 {
-    public interface IDAO<Entity>
+    public interface IDao<TEntity>
     {
-        public void Create(Entity entity);
-        public List<Entity> GetAll();
+        public void Create(TEntity entity);
+        public List<TEntity> GetAll();
     }
 }

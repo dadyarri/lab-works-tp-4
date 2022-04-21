@@ -1,43 +1,39 @@
 ﻿using Npgsql;
+
 namespace lw4API.Configuration
 {
     public class Database
     {
-        public Server server;
-        public NpgsqlDataReader reader;
+        private readonly Server _server;
+        public NpgsqlDataReader? Reader;
 
         public Database(IConfiguration configuration)
         {
-            this.server = new Server(configuration);
+            _server = new Server(configuration);
         }
 
         public void ExecuteSQLRequest_withParams(NpgsqlCommand cmd)
         {
-            cmd.Connection = this.server.connection;
+            cmd.Connection = _server.Connection;
             cmd.ExecuteNonQuery();
         }
 
-        public void ExecuteSQLRequest(string sql)
+        public void ExecuteSqlRequest(string sql)
         {
-            NpgsqlCommand cmd = new NpgsqlCommand(sql, this.server.connection);
-            reader = cmd.ExecuteReader();
-        }
-        public void ExecuteSQLRequest_withoutReader(string sql)
-        {
-            NpgsqlCommand cmd = new NpgsqlCommand(sql, this.server.connection);
-            cmd.ExecuteNonQuery();
+            NpgsqlCommand cmd = new NpgsqlCommand(sql, _server.Connection);
+            Reader = cmd.ExecuteReader();
         }
     }
 
     public class Server
     {
-        public NpgsqlConnection connection;
+        public readonly NpgsqlConnection Connection;
 
         public Server(IConfiguration configuration)
         {
-            string conn = string.Format(configuration.GetConnectionString("MyServer"));
-            connection = new NpgsqlConnection(conn);
-            connection.Open();
+            string conn = string.Format(configuration.GetConnectionString("Server"));
+            Connection = new NpgsqlConnection(conn);
+            Connection.Open();
         }
     }
 }
