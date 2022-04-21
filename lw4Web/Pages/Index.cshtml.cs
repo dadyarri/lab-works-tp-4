@@ -38,7 +38,7 @@ namespace lw4Web.Pages
             ViewStore.Games.Insert(0, Game);
             if (_client is not null)
             {
-                HttpResponseMessage response = await _client.PostAsJsonAsync("http://localhost:5124/Article", Game);
+                HttpResponseMessage response = await _client.PostAsJsonAsync("http://localhost:5124/Game", Game);
             }
         }
 
