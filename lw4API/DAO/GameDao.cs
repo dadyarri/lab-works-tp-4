@@ -17,7 +17,7 @@ namespace lw4API.DAO
 
         public void Create(Game game)
         {
-            NpgsqlCommand cmd = new("INSERT INTO game (title, developer, genre, date) VALUES (" +
+            NpgsqlCommand cmd = new("INSERT INTO game (title, developer, genre) VALUES (" +
                                     "@Title, @Developer, @Genre)");
             cmd.Parameters.AddWithValue("@Title", game.Title);
             cmd.Parameters.AddWithValue("@Developer", game.Developer);
