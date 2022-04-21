@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace lw4API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/Game")]
     public class GameController : ControllerBase
     {
         readonly GameDao _gameDao = new(Configuration.Configuration.config);
