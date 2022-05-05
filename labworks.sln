@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lw4API", "lw4API\lw4API.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lw4Web", "lw4Web\lw4Web.csproj", "{7E29CFB2-B813-42E1-96D7-CDB78680F60D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lw5", "lw5\lw5.csproj", "{7CA964B6-6B18-458A-9A79-EBE75FC966C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7E29CFB2-B813-42E1-96D7-CDB78680F60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E29CFB2-B813-42E1-96D7-CDB78680F60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E29CFB2-B813-42E1-96D7-CDB78680F60D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CA964B6-6B18-458A-9A79-EBE75FC966C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA964B6-6B18-458A-9A79-EBE75FC966C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA964B6-6B18-458A-9A79-EBE75FC966C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA964B6-6B18-458A-9A79-EBE75FC966C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

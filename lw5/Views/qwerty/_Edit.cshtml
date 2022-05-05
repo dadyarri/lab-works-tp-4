@@ -1,0 +1,25 @@
+@using lw5.Views.Home
+@model EditModel
+@{
+    ViewData["Title"] = "Edit";
+    Model.FillData(ViewBag.id);
+}
+<div>
+    <h1>Редактировать игру</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label for="titleField">Название</label>
+            <input id="titleField" class="form-control" value="@Model.GetGames()[0].Title" type="text" placeholder="Название"/>
+        </div>
+        <div class="mb-3">
+            <label for="developerField">Разработчик</label>
+            <input id="developerField" class="form-control" value="@Model.GetGames()[0].Developer" type="text" placeholder="Разработчик"/>
+        </div>
+        <div class="mb-3">
+            <label for="genreField">Жанр</label>
+            <input id="genreField" class="form-control" value="@Model.GetGames()[0].Genre" type="text" placeholder="Жанр"/>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Сохранить" asp-action="@Model.OnPost;">
+    </form>
+    
+</div>

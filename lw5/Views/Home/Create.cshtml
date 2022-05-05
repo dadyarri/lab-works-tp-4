@@ -1,0 +1,24 @@
+@model Game
+
+@{
+    ViewBag.Title = "Создание";
+    Layout = "_Layout";
+}
+
+<h2>Создание игры</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="titleField">Название</label>
+        <input id="titleField" class="form-control" type="text" placeholder="Название" asp-for="Title"/>
+    </div>
+    <div class="mb-3">
+        <label for="developerField">Разработчик</label>
+        <input id="developerField" class="form-control" type="text" placeholder="Разработчик" asp-for="Developer"/>
+    </div>
+    <div class="mb-3">
+        <label for="genreField">Жанр</label>
+        <input id="genreField" class="form-control" type="text" placeholder="Жанр" asp-for="Genre"/>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Сохранить">
+</form>

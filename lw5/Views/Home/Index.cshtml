@@ -1,0 +1,41 @@
+@model IEnumerable<Game>
+
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<div>
+    <h1>Список игр</h1>
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Название</td>
+                <td>Разработчик</td>
+                <td>Жанр</td>
+                <td>Действия</td>
+            </tr>
+            </thead>
+            @foreach (var game in Model)
+            {
+                <tr>
+                    <td>@game.Title</td>
+                    <td>@game.Developer</td>
+                    <td>@game.Genre</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="@Url.Action("Edit", "Home", new { id = game.Id })" class="btn btn-primary">
+                                <img src="https://img.icons8.com/ios/280/ffffff/edit" alt="edit" height="20">
+                            </a>
+                            <a href="@Url.Action("Delete", "Home", new { id = game.Id })" class="btn btn-danger">
+                                <img src="https://img.icons8.com/ios/280/ffffff/trash" alt="delete" height="20">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    <a href="@Url.Action("Create", "Home")" class="btn btn-primary">Создать</a>
+</div>

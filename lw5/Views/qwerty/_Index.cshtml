@@ -1,0 +1,44 @@
+@model lw5.Views.Home.IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+    Model.OnGet();
+}
+
+<div class="text-center">
+    @if (Model.GetGames().Count != 0)
+    {
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Название</td>
+                <td>Разработчик</td>
+                <td>Жанр</td>
+                <td>Действия</td>
+            </tr>
+            </thead>
+            @foreach (var game in Model.GetGames())
+            {
+                <tr>
+                    <td>@game.Title</td>
+                    <td>@game.Developer</td>
+                    <td>@game.Genre</td>
+                    <td>
+                        <div class="btn-group">
+                            @* <a href="@Url.Action("Edit", "Home", new { id = game.Id })" class="btn btn-primary"> *@
+                            @*     <img src="https://img.icons8.com/ios/280/ffffff/edit" alt="edit" height="20"> *@
+                            @* </a> *@
+                            <a href="@Url.Action("Index", "Home", new { id = game.Id })" class="btn btn-danger">
+                                <img src="https://img.icons8.com/ios/280/ffffff/trash" alt="delete" height="20">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class=""></div>
+    }
+    else
+    {
+        <h3>Нет записей. <a>Создать?</a></h3>
+    }
+</div>
