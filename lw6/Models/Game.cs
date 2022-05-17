@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace lw5.Models;
+namespace lw6.Models;
 
 [Table("game")]
 public class Game

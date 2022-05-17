@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace lw5.Models;
+namespace lw6.Models;
 
 public class GameContext: DbContext
 {

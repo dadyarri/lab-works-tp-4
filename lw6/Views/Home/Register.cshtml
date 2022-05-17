@@ -1,0 +1,20 @@
+@model User
+
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "_Layout";
+}
+
+<h2>Регистрация нового пользователя</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="titleField">Логин</label>
+        <input id="titleField" class="form-control" value="@Model.Username" type="text" placeholder="Логин" asp-for="Username"/>
+    </div>
+    <div class="mb-3">
+        <label for="developerField">Пароль</label>
+        <input id="developerField" class="form-control" value="@Model.Password" type="text" placeholder="Пароль" asp-for="Password"/>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Сохранить">
+</form>
