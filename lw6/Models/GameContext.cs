@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace lw6.Models;
 
-public class GameContext: DbContext
+public class GameContext: IdentityDbContext
 {
     public DbSet<Game> Games { get; set; }
 
