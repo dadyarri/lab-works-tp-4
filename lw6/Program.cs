@@ -1,3 +1,5 @@
+using lw6.Controllers;
+using lw6.Helpers;
 using lw6.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +14,16 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
+    .AddRoleManager<GameRoleManager>()
     .AddEntityFrameworkStores<GameContext>();
 builder.Services.AddControllersWithViews();
+
+await using (var sp = builder.Services.BuildServiceProvider())
+{
+    var roleManager = sp.GetRequiredService<GameRoleManager>();
+    await RoleHelper.EnsureRolesCreated(roleManager);
+}
+
 
 builder.Services.AddAuthorization(options =>
 {
