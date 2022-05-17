@@ -1,0 +1,25 @@
+@model Game
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>Удалить игру @Model.Title?</h2>
+<form method="post">
+    <div class="mb-3">
+        <label for="titleField">Название</label>
+        <input id="titleField" class="form-control" value="@Model.Title" type="text" placeholder="Название" asp-for="Title" disabled/>
+    </div>
+    <div class="mb-3">
+        <label for="developerField">Разработчик</label>
+        <input id="developerField" class="form-control" value="@Model.Developer" type="text" placeholder="Разработчик" asp-for="Developer" disabled/>
+    </div>
+    <div class="mb-3">
+        <label for="genreField">Жанр</label>
+        <input id="genreField" class="form-control" value="@Model.Genre" type="text" placeholder="Жанр" asp-for="Genre" disabled/>
+    </div>
+    <div class="btn-group">
+        <button type="submit" class="btn btn-danger">Да</button>
+        <a href="@Url.Action("DeleteDecline")" class="btn btn-primary">Нет</a>
+    </div>
+</form>
