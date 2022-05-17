@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using lw6.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lw6.Controllers;
@@ -22,6 +23,7 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [Authorize(Roles = "Administrator")]
     public IActionResult Edit(int? id)
     {
         if (id == null) return RedirectToAction("Index");
@@ -30,6 +32,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "Administrator")]
     public IActionResult Edit(Game game)
     {
         var model = db.Games.SingleOrDefault(g => g.Id == game.Id);
@@ -45,6 +48,7 @@ public class HomeController : Controller
     }
     
     [HttpGet]
+    [Authorize(Roles = "Administrator")]
     public IActionResult Delete(int? id)
     {
         if (id == null) return RedirectToAction("Index");
@@ -53,6 +57,7 @@ public class HomeController : Controller
     }
     
     [HttpPost]
+    [Authorize(Roles = "Administrator")]
     public IActionResult Delete(Game game)
     {
         db.Games.Remove(game);
@@ -67,6 +72,7 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [Authorize(Roles = "Administrator")]
     public IActionResult Create()
     {
         return View("Create");
@@ -74,6 +80,7 @@ public class HomeController : Controller
     
     
     [HttpPost]
+    [Authorize(Roles = "Administrator")]
     public IActionResult Create(Game game)
     {
         db.Games.Add(game);
