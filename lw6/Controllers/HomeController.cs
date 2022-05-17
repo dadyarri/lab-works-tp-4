@@ -9,7 +9,7 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private GameContext db;
-    
+
 
     public HomeController(ILogger<HomeController> logger, GameContext context)
     {
@@ -19,7 +19,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View("Index",db.Games.ToList());
+        return View("Index", db.Games.ToList());
     }
 
     [HttpGet]
@@ -44,9 +44,10 @@ public class HomeController : Controller
             model.Genre = game.Genre;
             db.SaveChanges();
         }
+
         return RedirectToAction("Index");
     }
-    
+
     [HttpGet]
     [Authorize(Roles = "Administrator")]
     public IActionResult Delete(int? id)
@@ -55,7 +56,7 @@ public class HomeController : Controller
         ViewBag.GameId = id;
         return View("Delete", db.Games.Find(id));
     }
-    
+
     [HttpPost]
     [Authorize(Roles = "Administrator")]
     public IActionResult Delete(Game game)
@@ -77,8 +78,8 @@ public class HomeController : Controller
     {
         return View("Create");
     }
-    
-    
+
+
     [HttpPost]
     [Authorize(Roles = "Administrator")]
     public IActionResult Create(Game game)
