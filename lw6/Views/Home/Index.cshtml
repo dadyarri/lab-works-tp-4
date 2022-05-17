@@ -1,41 +1,60 @@
+@using Microsoft.AspNetCore.Identity
 @model IEnumerable<Game>
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Главная";
 }
 
 <div>
-    <h1>Список игр</h1>
-    @if (Model.Any())
+    @if (SignInManager.IsSignedIn(User))
     {
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <td>Название</td>
-                <td>Разработчик</td>
-                <td>Жанр</td>
-                <td>Действия</td>
-            </tr>
-            </thead>
-            @foreach (var game in Model)
-            {
+        <h1>Список игр</h1>
+        @if (Model.Any())
+        {
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <td>@game.Title</td>
-                    <td>@game.Developer</td>
-                    <td>@game.Genre</td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="@Url.Action("Edit", "Home", new { id = game.Id })" class="btn btn-primary">
-                                <img src="https://img.icons8.com/ios/280/ffffff/edit" alt="edit" height="20">
-                            </a>
-                            <a href="@Url.Action("Delete", "Home", new { id = game.Id })" class="btn btn-danger">
-                                <img src="https://img.icons8.com/ios/280/ffffff/trash" alt="delete" height="20">
-                            </a>
-                        </div>
-                    </td>
+                    <td>Название</td>
+                    <td>Разработчик</td>
+                    <td>Жанр</td>
+                    <td>Действия</td>
                 </tr>
-            }
-        </table>
+                </thead>
+                @foreach (var game in Model)
+                {
+                    <tr>
+                        <td>@game.Title</td>
+                        <td>@game.Developer</td>
+                        <td>@game.Genre</td>
+                        <td>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <div class="btn-group">
+                                    <a href="@Url.Action("Edit", "Home", new { id = game.Id })" class="btn btn-primary">
+                                        <img src="https://img.icons8.com/ios/280/ffffff/edit" alt="edit" height="20">
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Home", new { id = game.Id })" class="btn btn-danger">
+                                        <img src="https://img.icons8.com/ios/280/ffffff/trash" alt="delete" height="20">
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <p>Действия недоступны</p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        @if (User.IsInRole("Administrator"))
+        {
+            <a href="@Url.Action("Create", "Home")" class="btn btn-primary">Создать</a>
+        }
     }
-    <a href="@Url.Action("Create", "Home")" class="btn btn-primary">Создать</a>
+    else
+    {
+        <p>Для просмотра сайта вы должны быть <a asp-area="Identity" asp-page="/Account/Register">зарегистрированы</a></p>
+    }
 </div>
