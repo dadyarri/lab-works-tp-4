@@ -15,6 +15,7 @@ public sealed class GameContext : IdentityDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Game>()
             .HasOne(g => g.Developer)
             .WithMany(d => d.Games);
