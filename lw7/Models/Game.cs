@@ -6,17 +6,17 @@ namespace lw7.Models;
 public class Game
 {
     [Column("id")]
-    public int Id { get; set; }
+    public int? Id { get; set; }
     [Column("title")]
-    public string Title { get; set; }
+    public string? Title { get; set; }
     [Column("developer")]
-    public string Developer { get; set; }
+    public Developer? Developer { get; set; }
     [Column("genre")]
-    public string Genre { get; set; }
+    public string? Genre { get; set; }
 
     public Game() { }
 
-    public Game(int id, string title, string developer, string genre)
+    public Game(int id, string title, Developer developer, string genre)
     {
         Id = id;
         Title = title;
