@@ -7,19 +7,17 @@ namespace lw7.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private GameContext db;
+    private readonly GameContext _db;
 
 
-    public HomeController(ILogger<HomeController> logger, GameContext context)
+    public HomeController(GameContext context)
     {
-        _logger = logger;
-        db = context;
+        _db = context;
     }
 
     public IActionResult Index()
     {
-        return View("Index", db.Games.ToList());
+        return View("Index", _db.Games?.ToList());
     }
 
     [HttpGet]
@@ -28,21 +26,21 @@ public class HomeController : Controller
     {
         if (id == null) return RedirectToAction("Index");
         ViewBag.GameId = id;
-        return View("Edit", db.Games.Find(id));
+        return View("Edit", _db.Games?.Find(id));
     }
 
     [HttpPost]
     [Authorize(Roles = "Administrator")]
     public IActionResult Edit(Game game)
     {
-        var model = db.Games.SingleOrDefault(g => g.Id == game.Id);
+        var model = _db.Games?.SingleOrDefault(g => g.Id == game.Id);
         if (model is not null)
         {
             model.Id = game.Id;
             model.Title = game.Title;
             model.Developer = game.Developer;
             model.Genre = game.Genre;
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         return RedirectToAction("Index");
@@ -54,15 +52,15 @@ public class HomeController : Controller
     {
         if (id == null) return RedirectToAction("Index");
         ViewBag.GameId = id;
-        return View("Delete", db.Games.Find(id));
+        return View("Delete", _db.Games?.Find(id));
     }
 
     [HttpPost]
     [Authorize(Roles = "Administrator")]
     public IActionResult Delete(Game game)
     {
-        db.Games.Remove(game);
-        db.SaveChanges();
+        _db.Games?.Remove(game);
+        _db.SaveChanges();
         return RedirectToAction("Index");
     }
 
@@ -84,8 +82,8 @@ public class HomeController : Controller
     [Authorize(Roles = "Administrator")]
     public IActionResult Create(Game game)
     {
-        db.Games.Add(game);
-        db.SaveChanges();
+        _db.Games?.Add(game);
+        _db.SaveChanges();
         return RedirectToAction("Index");
     }
 
