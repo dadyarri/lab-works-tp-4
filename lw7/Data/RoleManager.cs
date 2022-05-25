@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace lw7.Controllers;
+namespace lw7.Data;
 
-public class GameRoleManager : RoleManager<IdentityRole>
+public class RoleManager : RoleManager<IdentityRole>
 {
     private readonly ILogger<RoleManager<IdentityRole>> _logger;
 
-    public GameRoleManager(
+    public RoleManager(
         IRoleStore<IdentityRole> store,
         IEnumerable<IRoleValidator<IdentityRole>> roleValidators,
         ILookupNormalizer keyNormalizer,
         IdentityErrorDescriber errors,
-        ILogger<GameRoleManager> logger)
+        ILogger<RoleManager> logger)
         : base(store, roleValidators, keyNormalizer, errors, logger)
     {
         _logger = logger;
