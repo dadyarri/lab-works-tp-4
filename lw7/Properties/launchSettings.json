@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "lw6": {
+    "lw7": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
