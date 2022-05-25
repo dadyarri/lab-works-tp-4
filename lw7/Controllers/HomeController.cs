@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using lw7.Data;
 using lw7.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +8,10 @@ namespace lw7.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly GameContext _db;
+    private readonly ApplicationContext _db;
 
 
-    public HomeController(GameContext context)
+    public HomeController(ApplicationContext context)
     {
         _db = context;
     }

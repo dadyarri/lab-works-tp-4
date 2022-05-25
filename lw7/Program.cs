@@ -1,4 +1,4 @@
-using lw7.Controllers;
+using lw7.Data;
 using lw7.Helpers;
 using lw7.Models;
 using Microsoft.AspNetCore.Identity;
@@ -8,19 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Default");
-builder.Services.AddDbContext<GameContext>(options =>
+builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
-    .AddRoleManager<GameRoleManager>()
-    .AddEntityFrameworkStores<GameContext>();
+    .AddRoleManager<RoleManager>()
+    .AddEntityFrameworkStores<ApplicationContext>();
 builder.Services.AddControllersWithViews();
 
 await using (var sp = builder.Services.BuildServiceProvider())
 {
-    var roleManager = sp.GetRequiredService<GameRoleManager>();
+    var roleManager = sp.GetRequiredService<RoleManager>();
     await RoleHelper.EnsureRolesCreated(roleManager);
 }
 
