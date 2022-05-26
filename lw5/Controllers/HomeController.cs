@@ -17,7 +17,6 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        Console.WriteLine("hello");;
         return View("Index",db.Games.ToList());
     }
 
