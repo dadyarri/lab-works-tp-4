@@ -28,6 +28,7 @@ public class HomeController : Controller
                 Id = game.Id,
                 Title = game.Title,
                 Developer = developer.Name,
+                DeveloperId = developer.Id,
                 Genre = game.Genre
             });
 
@@ -99,6 +100,19 @@ public class HomeController : Controller
         _db.Games?.Add(game);
         _db.SaveChanges();
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public IActionResult Developer(int id)
+    {
+        var games = _db.Games.ToList();
+        var developers = _db.Developers.ToList();
+
+        var query =
+            from dev in developers
+            join game in games on dev.Id equals game.Developer.Id into gamesGroup
+            select new DeveloperGames(dev, gamesGroup);
+        return View("Developer", query);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
