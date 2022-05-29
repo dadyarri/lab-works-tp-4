@@ -9,8 +9,6 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <h1>Список игр</h1>
-        @if (Model.Any())
-        {
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -52,7 +50,7 @@
             <a href="@Url.Action("Create", "Home")" class="btn btn-primary">Создать</a>
         }
     }
-    else
+    @else
     {
         <p>Для просмотра сайта вы должны быть <a asp-area="Identity" asp-page="/Account/Register">зарегистрированы</a></p>
     }
