@@ -96,9 +96,11 @@ public class HomeController : Controller
 
     [HttpPost]
     [Authorize(Roles = "Administrator")]
-    public IActionResult Create(Game game)
+    public IActionResult Create(GameInt game)
     {
-        _db.Games?.Add(game);
+        Developer dev = _db.Developers.Single(dev => dev.Id == game.Developer);
+        Game created = new(game.Title, dev, game.Genre);
+        _db.Games?.Add(created);
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
@@ -112,6 +114,7 @@ public class HomeController : Controller
         var query =
             from dev in developers
             join game in games on dev.Id equals game.Developer.Id into gamesGroup
+            where dev.Id == id
             select new DeveloperGames(dev, gamesGroup);
         return View("Developer", query);
     }
