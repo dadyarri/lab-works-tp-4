@@ -9,7 +9,8 @@ namespace lw7.Data
 public class ApplicationContext : IdentityDbContext
 {
     // ReSharper disable once UnassignedGetOnlyAutoProperty
-    public DbSet<Game>? Games { get; }
+    public DbSet<Game> Games { get; set; }
+    public DbSet<Developer> Developers { get; set; }
 
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
