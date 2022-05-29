@@ -3,14 +3,17 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace lw7.Data
+
 ;
 
-public class ApplicationContext: IdentityDbContext
+public class ApplicationContext : IdentityDbContext
 {
-    public DbSet<Game> Games { get; set; }
+    // ReSharper disable once UnassignedGetOnlyAutoProperty
+    public DbSet<Game>? Games { get; }
 
-    public ApplicationContext(DbContextOptions<ApplicationContext> options): base(options)
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
+        // ReSharper disable once VirtualMemberCallInConstructor
         Database.EnsureCreated();
     }
 
