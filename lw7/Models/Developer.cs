@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lw7.Models;
 
+[Table("Developer")]
 public class Developer
 {
     public int? Id { get; set; }
