@@ -10,6 +10,13 @@ public class Game
     public string? Genre { get; set; }
 
     public Game() { }
+    
+    public Game(string title, Developer developer, string genre)
+    {
+        Title = title;
+        Developer = developer;
+        Genre = genre;
+    }
 
     public Game(int id, string title, Developer developer, string genre)
     {
