@@ -2,16 +2,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lw7.Models;
 
-[Table("game")]
 public class Game
 {
-    [Column("id")]
     public int? Id { get; set; }
-    [Column("title")]
     public string? Title { get; set; }
-    [Column("developer")]
     public Developer? Developer { get; set; }
-    [Column("genre")]
     public string? Genre { get; set; }
 
     public Game() { }
