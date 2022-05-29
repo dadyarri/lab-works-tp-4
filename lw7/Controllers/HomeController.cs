@@ -3,6 +3,7 @@ using lw7.Data;
 using lw7.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace lw7.Controllers;
 
@@ -18,7 +19,19 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View("Index", _db.Games?.ToList());
+        DbSet<Game> games = _db.Games;
+        DbSet<Developer> developers = _db.Developers;
+
+        var query = games.Join(developers, game => game.Developer.Id, developer => developer.Id,
+            (game, developer) => new
+            {
+                Id = game.Id,
+                Title = game.Title,
+                Developer = developer.Name,
+                Genre = game.Genre
+            });
+
+        return View("Index", query);
     }
 
     [HttpGet]
