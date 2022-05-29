@@ -22,7 +22,9 @@
             {
                 <tr>
                     <td>@entity.Title</td>
-                    <td>@entity.Developer</td>
+                    <td>
+                        <a href="@Url.Action("Developer", new { id = entity.DeveloperId })">@entity.Developer</a>
+                    </td>
                     <td>@entity.Genre</td>
                     <td>
                         @if (User.IsInRole("Administrator"))
