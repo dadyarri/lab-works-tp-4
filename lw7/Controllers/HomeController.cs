@@ -89,6 +89,7 @@ public class HomeController : Controller
     [Authorize(Roles = "Administrator")]
     public IActionResult Create()
     {
+        ViewBag.Developers = _db.Developers.ToList();
         return View("Create");
     }
 
