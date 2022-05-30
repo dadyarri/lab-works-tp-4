@@ -47,14 +47,15 @@ public class HomeController : Controller
 
     [HttpPost]
     [Authorize(Roles = "Administrator")]
-    public IActionResult Edit(Game game)
+    public IActionResult Edit(GameInt game)
     {
         var model = _db.Games?.SingleOrDefault(g => g.Id == game.Id);
+        var developer = _db.Developers?.SingleOrDefault(d => d.Id == game.Developer);
         if (model is not null)
         {
             model.Id = game.Id;
             model.Title = game.Title;
-            model.Developer = game.Developer;
+            model.Developer = developer;
             model.Genre = game.Genre;
             _db.SaveChanges();
         }
