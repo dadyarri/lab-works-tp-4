@@ -67,16 +67,26 @@ public class HomeController : Controller
     [Authorize(Roles = "Administrator")]
     public IActionResult Delete(int? id)
     {
+        DbSet<Game> games = _db.Games;
+        DbSet<Developer> developers = _db.Developers;
+        
         if (id == null) return RedirectToAction("Index");
-        ViewBag.GameId = id;
-        return View("Delete", _db.Games?.Find(id));
+        var query = games.Join(developers, game => game.Developer.Id, developer => developer.Id,
+            (game, developer) => new Game
+            {
+                Id = game.Id,
+                Title = game.Title,
+                Developer = developer,
+                Genre = game.Genre
+            }).Single(game => game.Id == id);
+        return View("Delete", query);
     }
 
     [HttpPost]
     [Authorize(Roles = "Administrator")]
-    public IActionResult Delete(Game game)
+    public IActionResult Delete(dynamic game)
     {
-        _db.Games?.Remove(game);
+        _db.Games?.Remove(game.Id);
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
