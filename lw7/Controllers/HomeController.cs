@@ -40,8 +40,9 @@ public class HomeController : Controller
     public IActionResult Edit(int? id)
     {
         if (id == null) return RedirectToAction("Index");
-        ViewBag.GameId = id;
-        return View("Edit", _db.Games?.Find(id));
+        ViewBag.Developers = _db.Developers.ToList();
+        ViewBag.Game = _db.Games?.Find(id);
+        return View("Edit");
     }
 
     [HttpPost]
