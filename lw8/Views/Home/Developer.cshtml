@@ -1,0 +1,23 @@
+@{
+    ViewBag.Title = "Страница разработчика";
+    Layout = "_Layout";
+}
+
+@foreach (DeveloperGames dg in Model)
+{
+    <h1>Игры, выпущенные @dg.Developer.Name</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <td>Название</td>
+        <td>Жанр</td>
+        </thead>
+        @foreach (Game entity in dg.Games)
+        {
+            <tr>
+                <td>@entity.Title</td>
+                <td>@entity.Genre</td>
+            </tr>
+        }
+    </table>
+}

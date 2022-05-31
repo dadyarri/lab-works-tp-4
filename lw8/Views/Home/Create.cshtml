@@ -1,0 +1,36 @@
+@model GameInt
+@{
+    ViewBag.Title = "Создание";
+    ViewBag.SelectItems = new SelectList(ViewBag.Developers, "Id", "Name");
+    Layout = "_Layout";
+}
+
+<h2>Создание игры</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="titleField">Название</label>
+        <input id="titleField" class="form-control" type="text" placeholder="Название" asp-for="Title"/>
+    </div>
+    <div class="mb-3">
+        <label for="developerField">Разработчик</label>
+        <select id="developerField" class="form-select" asp-items="@ViewBag.SelectItems">
+        </select>
+        <input type="hidden" asp-for="Developer" id="developerName" value="@ViewBag.Developers[0].Id"/>
+    </div>
+    <div class="mb-3">
+        <label for="genreField">Жанр</label>
+        <input id="genreField" class="form-control" type="text" placeholder="Жанр" asp-for="Genre"/>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Сохранить">
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#developerField").change(() => {
+            console.log("tick");
+            $("input#developerName").val($("#developerField option:selected").attr("value"));
+        })
+    </script>
+}

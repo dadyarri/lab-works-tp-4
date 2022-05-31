@@ -1,0 +1,58 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h1>Список игр</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Название</td>
+                <td>Разработчик</td>
+                <td>Жанр</td>
+                <td>Действия</td>
+            </tr>
+            </thead>
+            @foreach (var entity in Model)
+            {
+                <tr>
+                    <td>@entity.Title</td>
+                    <td>
+                        <a href="@Url.Action("Developer", new { id = entity.DeveloperId })">@entity.Developer</a>
+                    </td>
+                    <td>@entity.Genre</td>
+                    <td>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <div class="btn-group">
+                                <a href="@Url.Action("Edit", "Home", new { id = entity.Id })" class="btn btn-primary">
+                                    <img src="https://img.icons8.com/ios/280/ffffff/edit" alt="edit" height="20">
+                                </a>
+                                <a href="@Url.Action("Delete", "Home", new { id = entity.Id })" class="btn btn-danger">
+                                    <img src="https://img.icons8.com/ios/280/ffffff/trash" alt="delete" height="20">
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>Действия недоступны</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+        @if (User.IsInRole("Administrator"))
+        {
+            <a href="@Url.Action("Create", "Home")" class="btn btn-primary">Создать</a>
+        }
+    }
+    else
+    {
+        <p>Для просмотра сайта вы должны быть <a asp-area="Identity" asp-page="/Account/Register">зарегистрированы</a></p>
+    }
+</div>
