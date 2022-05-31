@@ -131,6 +131,32 @@ public class HomeController : Controller
         return View("Developer", query);
     }
 
+    [HttpGet]
+    public IActionResult Search()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult SearchGame(string query)
+    {
+        DbSet<Game> games = _db.Games;
+        DbSet<Developer> developers = _db.Developers;
+        
+        List<Game> result = games.Join(
+            developers, 
+            game => game.Developer.Id, 
+            developer => developer.Id,
+            (game, developer) => new Game
+            {
+                Id = game.Id,
+                Title = game.Title,
+                Developer = developer,
+                Genre = game.Genre
+            }).Where(game => game.Title.ToLower().Contains(query)).ToList();
+        return PartialView("_SearchResultsPartial", result);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
