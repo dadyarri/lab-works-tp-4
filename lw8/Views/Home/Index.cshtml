@@ -1,4 +1,5 @@
 @using Microsoft.AspNetCore.Identity
+@using System.Collections.Specialized
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
@@ -48,7 +49,8 @@
         </table>
         @if (User.IsInRole("Administrator"))
         {
-            <a href="@Url.Action("Create", "Home")" class="btn btn-primary">Создать</a>
+            <a id="createButton" class="btn btn-primary">Создать</a>
+            <div id="createForm"></div>
         }
         <a href="@Url.Action("Search", "Home")" class="btn btn-primary">Поиск</a>
     }
@@ -57,3 +59,12 @@
         <p>Для просмотра сайта вы должны быть <a asp-area="Identity" asp-page="/Account/Register">зарегистрированы</a></p>
     }
 </div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#createButton").click(() => {
+            $("#createForm").load("@Url.Action("Create")");
+        });
+    </script>
+}
